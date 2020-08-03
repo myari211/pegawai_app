@@ -10,7 +10,7 @@ class Departemen extends Model
     protected $primaryKey = "id";
     protected $fillable = ['departement']; 
 
-    public function pegawais(){
+    public function pegawai_departement(){
         return $this->hasMany(Pegawai::class, 'kode_departement');
     }
 }

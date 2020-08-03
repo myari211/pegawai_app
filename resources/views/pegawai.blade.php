@@ -18,10 +18,9 @@
   <tbody>
   @foreach($pegawai as $no => $p)
     <tr>
-      <!-- <th scope="row"> ++$no + ($jabatan->currentPage()-1) * $jabatan->perPage() </th> -->
       <th scope="row">{{ ++$no }}</th>
       <td>{{ $p -> nama }}</td>
-      <td>{{ $p->departement->departement }}</td>
+      <td>{{ $p->departement['departement'] }}</td>
       <td>{{ $p->jabatan->jabatan }}</td>
       <td class="d-flex justify-content-end">
         <button type="button" class="btn btn-warning bg-gradient rounded-pill mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_pegawai{{ $p -> id }}">
@@ -171,7 +170,7 @@
                   <div class="col-md-6 pl-0 pr-1">
                     <label for="department">Department</label>
                     <select name="department" class="form-select" id="department">
-                      <option value="{{ $p -> kode_departement }}">{{ $p -> departement -> departement }}</option>
+                      <option value="{{ $p -> kode_departement }}">{{ $p -> kode_departement }}</option>
                       @foreach($departement as $d)
                       <option value="{{ $d -> id }}">{{ $d -> departement }}</option>
                       @endforeach
@@ -254,7 +253,7 @@
                     <p>Departement : </p>
                   </div>
                   <div class="col-md-6">
-                    <p>{{ $p -> departement -> departement }}</p>
+                    <p>{{ $p -> departement['departement'] }}</p>
                   </div>
                 </div>
                 <div class="row">

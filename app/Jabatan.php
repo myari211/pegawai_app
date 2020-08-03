@@ -10,7 +10,7 @@ class Jabatan extends Model
     protected $primaryKey = "id";
     protected $fillable = ['jabatan'];
 
-    public function pegawai(){
+    public function pegawai_jabatan(){
         return $this->hasMany(Pegawai::class, 'kode_jabatan');
     }
 }
