@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <table class="table table-dark bg-gradient table-striped" style="margin-top:-25px">
   <thead>
     <tr>
@@ -15,26 +14,26 @@
     </tr>
   </thead>
   <tbody>
-  @php
+  <?php
     $i = 1;
-  @endphp
-  @foreach($departement as $d)
+  ?>
+  <?php $__currentLoopData = $departement; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <tr>
-      <th scope="row">{{ $i++ }}</th>
-      <td>{{ $d -> kode_departement }}</td>
-      <td>{{ $d -> departement }}</td>
+      <th scope="row"><?php echo e($i++); ?></th>
+      <td><?php echo e($d -> kode_departement); ?></td>
+      <td><?php echo e($d -> departement); ?></td>
       <td class="d-flex justify-content-end">
-        <button type="button" class="btn btn-warning bg-gradient mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_departement{{ $d -> id_departement }}">
+        <button type="button" class="btn btn-warning bg-gradient mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_departement<?php echo e($d -> id_departement); ?>">
             <i class="material-icons">create</i>
             &nbsp;Edit
         </button>
-        <button type="button" class="btn btn-danger bg-gradient align-item-center d-inline-flex align-items-center" data-toggle="modal" data-target="#delete_departement{{ $d -> id_departement }}">
+        <button type="button" class="btn btn-danger bg-gradient align-item-center d-inline-flex align-items-center" data-toggle="modal" data-target="#delete_departement<?php echo e($d -> id_departement); ?>">
             <i class="material-icons">delete</i>
             &nbsp;delete
         </button>
       </td>
     </tr>
-    @endforeach
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </tbody>
 </table>
 
@@ -54,8 +53,8 @@
       <div class="modal-body">
         <div class="container">
             <form method="post" action="/departement/add">
-                @csrf
-                <input type="hidden" name="id" value="{{ $departement->count() + 1 }}">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" name="id" value="<?php echo e($departement->count() + 1); ?>">
                 <div class="row">
                     <label for="kode_departement">Kode Departement</label>
                     <input type="text" name="kode_departement" id="departement" class="form-control">
@@ -77,8 +76,8 @@
   </div>
 </div>
 
-@foreach($departement as $d)
-<div class="modal fade" id="edit_departement{{$d -> id_departement}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php $__currentLoopData = $departement; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div class="modal fade" id="edit_departement<?php echo e($d -> id_departement); ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-warning bg-gradient d-inline-flex">
@@ -93,15 +92,15 @@
       <div class="modal-body">
         <div class="container">
             <form method="post" action="/departement/edit">
-                @csrf
-                <input type="hidden" name="id" value="{{ $d -> id_departement }}">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" name="id" value="<?php echo e($d -> id_departement); ?>">
                 <div class="row">
                   <label for="kode_departement">Kode Departement</label>
-                  <input type="text" name="kode_departement" id="kode_departement" class="form-control" value="{{ $d -> kode_departement }}">
+                  <input type="text" name="kode_departement" id="kode_departement" class="form-control" value="<?php echo e($d -> kode_departement); ?>">
                 </div>
                 <div class="row">
                     <label for="department">Departement</label>
-                    <input type="text" name="departement" id="department" class="form-control" value="{{ $d -> departement }}">
+                    <input type="text" name="departement" id="department" class="form-control" value="<?php echo e($d -> departement); ?>">
                 </div>
         </div>
       </div>
@@ -116,7 +115,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="delete_departement{{$d -> id_departement}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete_departement<?php echo e($d -> id_departement); ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger bg-gradient d-inline-flex">
@@ -131,13 +130,13 @@
       <div class="modal-body">
         <div class="container">
             <form method="get" action="/departement/delete">
-                @csrf
-                <input type="hidden" name="id" value="{{ $d -> id_departement }}">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" name="id" value="<?php echo e($d -> id_departement); ?>">
                 <div class="row">
                     <p>Apakah anda yakin akan menghapus data ini ?</p>
                 </div>
                 <div class="row">
-                    <p>{{ $d -> departement }}</p>
+                    <p><?php echo e($d -> departement); ?></p>
                 </div>
         </div>
       </div>
@@ -152,5 +151,6 @@
   </div>
 </div>
 
-@endforeach
-@endsection
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /pegawai_vue/laravel/resources/views/department.blade.php ENDPATH**/ ?>

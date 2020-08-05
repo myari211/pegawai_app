@@ -38,3 +38,6 @@ Route::get('/pegawai', 'PegawaiController@index');
 Route::post('/pegawai/add', 'PegawaiController@add');
 Route::post('/pegawai/edit', 'PegawaiController@edit');
 Route::post('/pegawai/delete', 'PegawaiController@delete');
+
+//profile
+Route::get('/profile/{id}', 'ProfileController@index');

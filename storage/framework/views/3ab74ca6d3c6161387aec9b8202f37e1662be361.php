@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;1,100;1,400&display=swap" rel="stylesheet">
     <title>Aplikasi Pegawai</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
 body{
@@ -115,8 +115,8 @@ body{
             </button>
             <ul class="dropdown-menu mr-2 p-2 bg-secondary" style="height:15rem">
                 <li></li>
-                <li class="text-center text-white" style="margin-top:60px">{{ Auth::user()->name }}</li>
-                <li class=" text-center text-white">{{ Auth::user()->email }}</li>
+                <li class="text-center text-white" style="margin-top:60px"><?php echo e(Auth::user()->name); ?></li>
+                <li class=" text-center text-white"><?php echo e(Auth::user()->email); ?></li>
                 <li class="d-flex align-items-end justify-content-center">
                     <button type="button" class="btn btn-danger">Logout</button>
                 </li>
@@ -176,7 +176,7 @@ body{
     <!-- MAIN -->
         <div class="col-md p-0 m-0">
             <main class="py-4 p-0 m-0">
-                @yield('content')
+                <?php echo $__env->yieldContent('content'); ?>
             </main>
         </div>
     </div>
@@ -186,3 +186,4 @@ body{
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
   </body>
 </html>
+<?php /**PATH /pegawai_vue/laravel/resources/views/layouts/app.blade.php ENDPATH**/ ?>
