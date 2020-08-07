@@ -16,20 +16,24 @@ class JabatanController extends Controller
 
     protected function add(Request $request){
         DB::table('jabatan')->insert([
+            'id_jabatan' => $request ->id,
+            'kode_jabatan' => $request ->kode_jabatan,
             'jabatan'=> $request ->jabatan
         ]);
+        
         return redirect('/jabatan');
     }
 
     protected function edit(Request $request){
-        DB::table('jabatan')->where('id', $request->id)->update([
+        DB::table('jabatan')->where('id_jabatan', $request->id)->update([
+            'kode_jabatan' => $request->kode_jabatan,
             'jabatan'=> $request->jabatan
         ]);
         return redirect('/jabatan');
     }
 
     protected function delete(Request $request){
-        DB::table('jabatan')->where('id', $request->id)->delete();
+        DB::table('jabatan')->where('id_jabatan', $request->id)->delete();
 
         return redirect('/jabatan');
     }

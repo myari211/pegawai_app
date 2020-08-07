@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th scope="col">No</th>
+      <th scope="col">Kode Jabatan</th>
       <th scope="col">Jabatan</th>
       <th class="col d-flex justify-content-end">
         <button type="button" class="btn btn-primary bg-gradient rounded-pill d-inline-flex" data-toggle="modal" data-target="#tambah_pegawai">
@@ -17,13 +18,14 @@
   @foreach($jabatan as $no => $j)
     <tr>
       <th scope="row">{{ ++$no + ($jabatan->currentPage()-1) * $jabatan->perPage() }}</th>
+      <td>{{ $j -> kode_jabatan }}</td>
       <td>{{ $j -> jabatan }}</td>
       <td class="d-flex justify-content-end">
-        <button type="button" class="btn btn-warning bg-gradient rounded-pill mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_jabatan{{ $j -> id }}">
+        <button type="button" class="btn btn-warning bg-gradient rounded-pill mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_jabatan{{ $j -> id_jabatan }}">
             <i class="material-icons">create</i>
             &nbsp;Edit
         </button>
-        <button type="button" class="btn btn-danger bg-gradient rounded-pill align-item-center d-inline-flex align-items-center" data-toggle="modal" data-target="#delete_jabatan{{ $j -> id }}">
+        <button type="button" class="btn btn-danger bg-gradient rounded-pill align-item-center d-inline-flex align-items-center" data-toggle="modal" data-target="#delete_jabatan{{ $j -> id_jabatan }}">
             <i class="material-icons">delete</i>
             &nbsp;delete
         </button>
@@ -54,6 +56,11 @@
         <div class="container">
             <form method="post" action="/jabatan/add">
                 @csrf
+                <input type="hidden" name="id" value="{{ $jabatan->count() + 1 }}">
+                <div class="row">
+                    <label for=kode_jabatan>Kode Jabatan</label>
+                    <input type="text" name="kode_jabatan" id="kode_jabatan" class="form-control">
+                </div>
                 <div class="row">
                     <label for="jabatan">Jabatan</label>
                     <input type="text" name="jabatan" id="jabatan" class="form-control">
@@ -72,7 +79,7 @@
 </div>
 
 @foreach($jabatan as $j)
-<div class="modal fade" id="edit_jabatan{{$j -> id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit_jabatan{{$j -> id_jabatan}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-warning bg-gradient d-inline-flex">
@@ -88,7 +95,11 @@
         <div class="container">
             <form method="post" action="/jabatan/edit">
                 @csrf
-                <input type="hidden" name="id" value="{{ $j -> id }}">
+                <input type="hidden" name="id" value="{{ $j -> id_jabatan }}">
+                <div class="row">
+                    <label for="kode_jabatan">Kode Jabatan</label>
+                    <input type="text" name="kode_jabatan" id="kode_jabatan" class="form-control" value="{{ $j -> kode_jabatan }}">
+                </div>
                 <div class="row">
                     <label for="jabatan">Jabatan</label>
                     <input type="text" name="jabatan" id="jabatan" class="form-control" value="{{ $j -> jabatan }}">
@@ -106,7 +117,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="delete_jabatan{{$j -> id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete_jabatan{{$j -> id_jabatan}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger bg-gradient d-inline-flex">
@@ -122,7 +133,7 @@
         <div class="container">
             <form method="get" action="/jabatan/delete">
                 @csrf
-                <input type="hidden" name="id" value="{{ $j -> id }}">
+                <input type="hidden" name="id" value="{{ $j -> id_jabatan }}">
                 <div class="row">
                     <p>Apakah anda yakin akan menghapus data ini ?</p>
                 </div>

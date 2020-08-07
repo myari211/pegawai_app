@@ -9,26 +9,29 @@ use App\Departemen;
 class DepartemenController extends Controller
 {
     public function index(){
-        $departemen = Departemen::all();
-        return view('department', ['departemen'=> $departemen]);
+        $departement = DB::table('departement')->get();
+        return view('department', ['departement'=> $departement]);
     }
 
     protected function add(Request $request){
         DB::table('departement')->insert([
-            'departement'=> $request ->departemen
+            'id_departement' => $request->id,
+            'kode_departement' => $request->kode_departement,
+            'departement'=> $request ->departement
         ]);
         return redirect('/department');
     }
 
     protected function edit(Request $request){
-        DB::table('departement')->where('id', $request->id)->update([
-            'departement'=> $request->departemen
+        DB::table('departement')->where('id_departement', $request->id)->update([
+            'departement'=> $request->departement,
+            'kode_departement' => $request->kode_departement
         ]);
         return redirect('/department');
     }
 
     protected function delete(Request $request){
-        DB::table('departement')->where('id', $request->id)->delete();
+        DB::table('departement')->where('id_departement', $request->id)->delete();
 
         return redirect('/department');
     }

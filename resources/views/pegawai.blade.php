@@ -20,8 +20,8 @@
     <tr>
       <th scope="row">{{ ++$no }}</th>
       <td>{{ $p -> nama }}</td>
-      <td>{{ $p->departement['departement'] }}</td>
-      <td>{{ $p->jabatan->jabatan }}</td>
+      <td>{{ $p -> departement }}</td>
+      <td>{{ $p -> jabatan }}</td>
       <td class="d-flex justify-content-end">
         <button type="button" class="btn btn-warning bg-gradient rounded-pill mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_pegawai{{ $p -> id }}">
             <i class="material-icons">create</i>
@@ -80,7 +80,7 @@
                     <label for="department">Department</label>
                     <select name="department" class="form-select" id="department">
                       @foreach($departement as $d)
-                      <option value="{{ $d -> id }}">{{ $d -> departement }}</option>
+                      <option value="{{ $d -> kode_departement }}">{{ $d -> departement }}</option>
                       @endforeach
                     </select>
                   </div>
@@ -88,7 +88,7 @@
                     <label for="jabatan">Jabatan :</label>
                     <select name="jabatan" class="form-select">
                     @foreach($jabatan as $j)
-                      <option value="{{ $j -> id }}">{{ $j -> jabatan }}</option>
+                      <option value="{{ $j -> kode_jabatan }}">{{ $j -> jabatan }}</option>
                     @endforeach
                     </select>
                   </div>
@@ -126,7 +126,7 @@
   </div>
 </div>
 
-@foreach($pegawai as $p)
+@foreach($pegawai_edit as $p)
 <div class="modal fade" id="edit_pegawai{{ $p -> id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
@@ -170,18 +170,18 @@
                   <div class="col-md-6 pl-0 pr-1">
                     <label for="department">Department</label>
                     <select name="department" class="form-select" id="department">
-                      <option value="{{ $p -> kode_departement }}">{{ $p -> kode_departement }}</option>
+                      <option value="{{ $p -> kode_departement }}">@foreach ($pegawai as $d){{ $d -> departement }}@endforeach</option>
                       @foreach($departement as $d)
-                      <option value="{{ $d -> id }}">{{ $d -> departement }}</option>
+                      <option value="{{ $d -> kode_departement }}">{{ $d -> departement }}</option>
                       @endforeach
                     </select>
                   </div>
                   <div class="col-md-6 pl-1 pr-0">
                     <label for="jabatan">Jabatan :</label>
                     <select name="jabatan" class="form-select">
-                      <option value="{{ $p -> kode_jabatan }}" class="disable">{{ $p -> jabatan -> jabatan }}</option>
+                      <option value="{{ $p -> kode_jabatan }}" class="disable">@foreach($pegawai as $j){{ $j -> jabatan }}@endforeach</option>
                     @foreach($jabatan as $j)
-                      <option value="{{ $j -> id }}">{{ $j -> jabatan }}</option>
+                      <option value="{{ $j -> kode_jabatan }}">{{ $j -> jabatan }}</option>
                     @endforeach
                     </select>
                   </div>
@@ -234,9 +234,9 @@
       </div>
       <div class="modal-body">
         <div class="container">
-            <form method="get" action="/departement/delete">
+            <form method="post" action="/pegawai/delete">
                 @csrf
-                <input type="hidden" name="id" value="{{ $d -> id }}">
+                <input type="hidden" name="id" value="{{ $p -> id }}">
                 <div class="row">
                     <p>Apakah anda yakin akan menghapus data ini ?</p>
                 </div>
@@ -253,7 +253,9 @@
                     <p>Departement : </p>
                   </div>
                   <div class="col-md-6">
-                    <p>{{ $p -> departement['departement'] }}</p>
+                  @foreach($pegawai as $pe)
+                    <p>{{ $pe -> departement }}</p>
+                  @endforeach
                   </div>
                 </div>
                 <div class="row">
@@ -261,7 +263,9 @@
                     <p>Jabatan : </p>
                   </div>
                   <div class="col-md-6">
-                    <p>{{ $p -> jabatan -> jabatan }}</p>
+                    @foreach($pegawai as $pe)
+                    <p>{{ $pe -> jabatan }}</p>
+                    @endforeach
                   </div>
                 </div>
                 <div class="row">

@@ -34,6 +34,6 @@ class PegawaiMigration extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('pegawai');
     }
 }

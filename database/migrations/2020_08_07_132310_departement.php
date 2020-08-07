@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DepartemenMigration extends Migration
+class Departement extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,14 @@ class DepartemenMigration extends Migration
     public function up()
     {
         Schema::create('departement', function(Blueprint $table){
-            $table -> id();
+            $table -> unsignedInteger('id_departement');
+            $table -> string('kode_departement');
             $table -> string('departement');
+            $table -> primary('kode_departement');
+        });
+
+        Schema::table('pegawai', function($table){
+            $table->foreign('kode_departement')->references('kode_departement')->on('departement');
         });
     }
 
@@ -26,6 +32,6 @@ class DepartemenMigration extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('departement');
     }
 }

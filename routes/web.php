@@ -37,4 +37,4 @@ Route::get('/jabatan/delete', 'JabatanController@delete');
 Route::get('/pegawai', 'PegawaiController@index');
 Route::post('/pegawai/add', 'PegawaiController@add');
 Route::post('/pegawai/edit', 'PegawaiController@edit');
-Route::get('/pegawai/delete', 'PegawaiController@delete');
+Route::post('/pegawai/delete', 'PegawaiController@delete');

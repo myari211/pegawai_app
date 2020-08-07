@@ -4,20 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Pegawai;
-use App\Jabatan;
-use App\Departemen;
 
 class PegawaiController extends Controller
 {
     public function index(){
+        $pegawai = DB::table('pegawai')->join('departement','pegawai.kode_departement','=','departement.kode_departement')->join('jabatan','pegawai.kode_jabatan','=','jabatan.kode_jabatan')->get();
+        $pegawai_edit = DB::table('pegawai')->get();
+        $jabatan = DB::table('jabatan')->get();
+        $departement = DB::table('departement')->get(); 
 
-        $pegawai = Pegawai::all();
-        $jabatan = Jabatan::all();
-        $departement = Departemen::all();
 
 
-        return view('pegawai', ['pegawai' => $pegawai, 'departement' => $departement, 'jabatan' => $jabatan]);
+        return view('pegawai',compact('pegawai','pegawai_edit','departement','jabatan'));
     }
 
     protected function add(Request $request){
@@ -50,8 +48,8 @@ class PegawaiController extends Controller
         return redirect('/pegawai');
     }
 
-    protected function delete(Request $request){
-        DB::table('jabatan')->where('id', $request->id)->delete();
+    public function delete(Request $request){
+        DB::table('pegawai')->where('id', $request->id)->delete();
 
         return redirect('/pegawai');
     }

@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th scope="col">No</th>
+      <th scope="col">Kode Departement</th>
       <th scope="col">Department</th>
       <th class="col d-flex justify-content-end">
         <button type="button" class="btn btn-primary bg-gradient rounded-pill d-inline-flex" data-toggle="modal" data-target="#tambah_pegawai">
@@ -17,16 +18,17 @@
   @php
     $i = 1;
   @endphp
-  @foreach($departemen as $d)
+  @foreach($departement as $d)
     <tr>
       <th scope="row">{{ $i++ }}</th>
+      <td>{{ $d -> kode_departement }}</td>
       <td>{{ $d -> departement }}</td>
       <td class="d-flex justify-content-end">
-        <button type="button" class="btn btn-warning bg-gradient rounded-pill mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_departement{{ $d -> id }}">
+        <button type="button" class="btn btn-warning bg-gradient rounded-pill mr-2 d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_departement{{ $d -> id_departement }}">
             <i class="material-icons">create</i>
             &nbsp;Edit
         </button>
-        <button type="button" class="btn btn-danger bg-gradient rounded-pill align-item-center d-inline-flex align-items-center" data-toggle="modal" data-target="#delete_departement{{ $d -> id }}">
+        <button type="button" class="btn btn-danger bg-gradient rounded-pill align-item-center d-inline-flex align-items-center" data-toggle="modal" data-target="#delete_departement{{ $d -> id_departement }}">
             <i class="material-icons">delete</i>
             &nbsp;delete
         </button>
@@ -53,9 +55,14 @@
         <div class="container">
             <form method="post" action="/departement/add">
                 @csrf
+                <input type="hidden" name="id" value="{{ $departement->count() + 1 }}">
+                <div class="row">
+                    <label for="kode_departement">Kode Departement</label>
+                    <input type="text" name="kode_departement" id="departement" class="form-control">
+                </div>
                 <div class="row">
                     <label for="department">Departement</label>
-                    <input type="text" name="departemen" id="department" class="form-control">
+                    <input type="text" name="departement" id="department" class="form-control">
                 </div>
         </div>
       </div>
@@ -70,8 +77,8 @@
   </div>
 </div>
 
-@foreach($departemen as $d)
-<div class="modal fade" id="edit_departement{{$d -> id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach($departement as $d)
+<div class="modal fade" id="edit_departement{{$d -> id_departement}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-warning bg-gradient d-inline-flex">
@@ -87,10 +94,14 @@
         <div class="container">
             <form method="post" action="/departement/edit">
                 @csrf
-                <input type="hidden" name="id" value="{{ $d -> id }}">
+                <input type="hidden" name="id" value="{{ $d -> id_departement }}">
+                <div class="row">
+                  <label for="kode_departement">Kode Departement</label>
+                  <input type="text" name="kode_departement" id="kode_departement" class="form-control" value="{{ $d -> kode_departement }}">
+                </div>
                 <div class="row">
                     <label for="department">Departement</label>
-                    <input type="text" name="departemen" id="department" class="form-control" value="{{ $d -> departement }}">
+                    <input type="text" name="departement" id="department" class="form-control" value="{{ $d -> departement }}">
                 </div>
         </div>
       </div>
@@ -105,7 +116,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="delete_departement{{$d -> id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete_departement{{$d -> id_departement}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger bg-gradient d-inline-flex">
@@ -121,7 +132,7 @@
         <div class="container">
             <form method="get" action="/departement/delete">
                 @csrf
-                <input type="hidden" name="id" value="{{ $d -> id }}">
+                <input type="hidden" name="id" value="{{ $d -> id_departement }}">
                 <div class="row">
                     <p>Apakah anda yakin akan menghapus data ini ?</p>
                 </div>
