@@ -118,10 +118,13 @@ body{
                 <li class="text-center text-white" style="margin-top:60px"><?php echo e(Auth::user()->name); ?></li>
                 <li class=" text-center text-white"><?php echo e(Auth::user()->email); ?></li>
                 <li class="d-flex align-items-end justify-content-center">
-                    <button type="button" class="btn btn-danger">Logout</button>
+                    <button type="button" class="btn btn-danger shadow" href="<?php echo e(route('logout')); ?>" onClick="event.preventDefault(); document.getElementById('logout-form').submit();"><?php echo e(__('Logout')); ?></button>
                 </li>
             </ul>
         </div>
+        <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="post" style="display: none;">
+            <?php echo csrf_field(); ?>
+        </form>
 
     </nav>
     <div class="row" id="body-row">
@@ -157,15 +160,17 @@ body{
                     </a>
                 </div>
                 <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="fa fa-user fa-fw mr-3"></span>
-                        <span class="menu-collapsed">Profile</span>
-                        <span class="submenu-icon ml-auto"></span>
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                        <span class="menu-collapsed">Gudang</span>
+                        <i class="material-icons" style="font-size:20px">store</i>
                     </div>
                 </a>
                 <div id='submenu2' class="collapse sidebar-submenu">
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Settings</span>
+                    <a href="/barang" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed d-flex justify-content-between align-items-center">
+                            Daftar Barang
+                            <i class="material-icons" style="font-size:20px">weekend</i>
+                        </span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
                         <span class="menu-collapsed">Password</span>

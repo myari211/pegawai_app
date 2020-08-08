@@ -41,3 +41,11 @@ Route::post('/pegawai/delete', 'PegawaiController@delete');
 
 //profile
 Route::get('/profile/{id}', 'ProfileController@index');
+Route::post('/profile/foto', 'ProfileController@foto');
+
+//barang
+Route::get('/barang', 'BarangController@index');
+Route::post('/barang/add', 'BarangController@add');
+Route::get('/barang/mutasi', 'BarangController@mutasi');
+Route::post('/mutasi/add', 'BarangController@mutasi_add');
+Route::post('/mutasi/out', 'BarangController@mutasi_out');

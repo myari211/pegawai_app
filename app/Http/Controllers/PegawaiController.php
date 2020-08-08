@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class PegawaiController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $pegawai = DB::table('pegawai')->join('departement','pegawai.kode_departement','=','departement.kode_departement')->join('jabatan','pegawai.kode_jabatan','=','jabatan.kode_jabatan')->get();
         $pegawai_edit = DB::table('pegawai')->get();

@@ -17,4 +17,17 @@ class ProfileController extends Controller
     
         return view('profile', compact('profile'));
     }
+
+    public function foto(Request $request){
+        if($request->hasFile('image')){
+            $resources = $request->file('image');
+            $name = $resources->getClientOriginalName();
+            $resources->move(\base_path() ."/public/images", $name);
+            $save = DB::table('pegawai')->insert(['foto' => $name]);
+        }
+        else
+        {
+            echo "Gagal Upload Gambar";
+        }
+    }
 }

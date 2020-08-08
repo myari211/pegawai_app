@@ -4,7 +4,12 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card" style="width:15rem; height:15rem">
-                <div class="card-body">
+                <div class="card-body p-1">
+                    <div class="d-flex justify-content-end align-items-end p-0 m-0">
+                        <button type="button" class="btn btn-transparent p-0" data-toggle="modal" data-target="#staticBackdrop">
+                            <i class="material-icons text-secondary">create</i>
+                        </button>
+                    </div>
                     <img class="rounded" src="">
                 </div>
             </div>
@@ -65,6 +70,38 @@
         </div>
     </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Upload Avatar</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="form-file">
+                <form action = "/profile/foto" method="post" enctype="multipart/form-data"> 
+                    <?php echo e(csrf_field()); ?>
+
+                    <input type="file" class="form-file-input" id="customFile" name="foto">
+                    <label class="form-file-label" for="customFile">
+                        <span class="form-file-text">Choose file...</span>
+                        <span class="form-file-button btn-secondary">Browse</span>
+                    </label>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Understood</button>
+                </form>
+      </div>
+    </div>
+  </div>
 </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /pegawai_vue/laravel/resources/views/profile.blade.php ENDPATH**/ ?>

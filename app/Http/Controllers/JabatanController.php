@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class JabatanController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
 
         $jabatan=DB::table('jabatan')->paginate(8);

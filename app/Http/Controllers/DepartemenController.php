@@ -8,6 +8,10 @@ use App\Departemen;
 
 class DepartemenController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         $departement = DB::table('departement')->get();
         return view('department', ['departement'=> $departement]);
