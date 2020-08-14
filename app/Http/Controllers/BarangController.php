@@ -10,7 +10,7 @@ class BarangController extends Controller
 {
     public function index(){
 
-        $barang = DB::table('barang')->get();
+        $barang = DB::table('barang')->paginate(10);
         $mutasi = DB::table('mutasi_barang')->get();
 
         return view('barang', compact('barang', 'mutasi'));

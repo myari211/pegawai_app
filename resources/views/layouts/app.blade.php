@@ -172,8 +172,17 @@ body{
                             <i class="material-icons" style="font-size:20px">weekend</i>
                         </span>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Password</span>
+                    <a href="/barang/mutasi" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed d-flex justify-content-between align-items-center">
+                            Mutasi
+                            <i class="material-icons" style="font-size:20px">swap_vert</i>
+                        </span>
+                    </a>
+                    <a href="/barang/stok_akhir" class="list-group-item list-group-item-action bg-dark text-white">
+                        <span class="menu-collapsed d-flex justify-content-between align-items-center">
+                            Stok Barang
+                            <i class="material-icons" style="font-size:20px">archive</i>
+                        </span>
                     </a>
                 </div>            
             </ul>

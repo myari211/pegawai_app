@@ -49,3 +49,6 @@ Route::post('/barang/add', 'BarangController@add');
 Route::get('/barang/mutasi', 'BarangController@mutasi');
 Route::post('/mutasi/add', 'BarangController@mutasi_add');
 Route::post('/mutasi/out', 'BarangController@mutasi_out');
+
+//stok akhir
+Route::get('/barang/stok_akhir', 'StokAkhirController@index');

@@ -23,8 +23,8 @@
       <td><?php echo e($b -> kode_barang); ?></td>
       <td><?php echo e($b -> nama_barang); ?></td>
       <td><?php echo e($b -> satuan); ?></td>
-      <td><?php echo e($b -> harga_pembelian); ?></td>
-      <td><?php echo e($b -> harga_jual); ?></td>
+      <td> Rp. <?php echo number_format($b -> harga_pembelian,0,',','.'); ?></td>
+      <td> Rp. <?php echo number_format($b -> harga_jual,0,',','.'); ?></td>
       <td class="d-flex justify-content-end">
         <button type="button" class="btn btn-warning bg-gradient d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_barang<?php echo e($b -> id); ?>">
             <i class="material-icons">create</i>
@@ -56,6 +56,10 @@
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </tbody>
 </table>
+<div class="d-flex justify-content-center">
+  <?php echo e($barang -> links()); ?>
+
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="tambah_barang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

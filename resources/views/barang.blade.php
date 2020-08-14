@@ -24,8 +24,8 @@
       <td>{{ $b -> kode_barang }}</td>
       <td>{{ $b -> nama_barang}}</td>
       <td>{{ $b -> satuan }}</td>
-      <td>{{ $b -> harga_pembelian }}</td>
-      <td>{{ $b -> harga_jual }}</td>
+      <td> @currency($b -> harga_pembelian)</td>
+      <td> @currency($b -> harga_jual)</td>
       <td class="d-flex justify-content-end">
         <button type="button" class="btn btn-warning bg-gradient d-inline-flex align-items-center" data-toggle="modal" data-target="#edit_barang{{ $b -> id }}">
             <i class="material-icons">create</i>
@@ -57,6 +57,9 @@
     @endforeach
   </tbody>
 </table>
+<div class="d-flex justify-content-center">
+  {{ $barang -> links() }}
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="tambah_barang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
